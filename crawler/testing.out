@@ -1,0 +1,2 @@
+bash -v testing.sh
+Makefile:28: recipe for target 'test' failed
