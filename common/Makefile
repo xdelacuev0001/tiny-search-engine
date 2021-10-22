@@ -1,12 +1,12 @@
 # Makefile for the common.a library used for TSE labs
 # Inspired by knowledge unit about Makefiles and libraries
 # Xenia Dela Cueva 
-#21F CS50 Lab4
+#21F CS50 Lab4, Updated for Lab 5 
 
 
 L = ../libcs50
 # object files, and the target library
-OBJS = pagedir.o ../libcs50/webpage.h
+OBJS = pagedir.o index.o word.o ../libcs50/webpage.h
 LIB = common.a
 
 
@@ -21,6 +21,9 @@ $(LIB): $(OBJS)
 
 # Dependencies: object files depend on header files
 pagedir.o:	pagedir.h
+index.o:	index.h
+word.o:		word.h
+
 
 .PHONY: clean
 

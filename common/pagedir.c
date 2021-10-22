@@ -15,6 +15,8 @@
 /************* function prototypes ***************/
 bool pagedir_init(const char* pageDirectory);
 void pagedir_save(const webpage_t* page, const char* pageDirectory, const int docID);
+webpage_t* pagedir_load(FILE* file);
+bool pagedir_verify(const char* pageDirectory);
 
 /******** pagedir_init ************************/
 /* refer to pagedir.h for function overview **/
@@ -50,7 +52,7 @@ bool pagedir_init(const char* pageDirectory)
 void pagedir_save(const webpage_t* page, const char* pageDirectory, const int docID)
 {
     FILE* fp;
-    char* file = malloc(strlen(pageDirectory));
+    char* file = mem_malloc(strlen(pageDirectory));
     char* path = mem_malloc(strlen(pageDirectory) + 10);
 
     //docID to string format to name files
@@ -84,6 +86,71 @@ void pagedir_save(const webpage_t* page, const char* pageDirectory, const int do
         exit(1);
     }
 }
+
+/******** pagedir_verify ************************/
+/* refer to pagedir.h for function overview **/
+bool pagedir_verify(const char* pageDirectory) {
+
+    FILE* fp;
+    char* file_path = mem_malloc(strlen(pageDirectory) + 10);
+
+    strcpy(file_path, pageDirectory);
+    strcat(file_path, "/.crawler");
+
+    if (fp = fopen(file_path) != NULL) {
+
+        fclose(file_path);
+        return true;
+    }
+
+    else {
+        fclose(file_path);
+        return false;
+    }  
+
+}
+
+/******** pagedir_load ************************/
+/* refer to pagedir.h for function overview **/
+webpage_t* pagedir_load(FILE* file) {
+
+    FILE* fp;
+
+
+    //open 
+    if ((fp = fopen(file)) != NULL) {
+        //first line is URL
+        //second line is depth
+        //third is html
+        
+        char* url = file_readLine(file); 
+        char* dep_ch = file_readLine(file);
+        int depth = 0;
+        sscanf(dep_ch, "%d", depth);
+        
+        char* html = file_readFile(file);
+        
+        webpage_t* make_web = mem_malloc(sizeof(webpage_t));
+        make_web = webpage_new(url, depth, html);
+        mem_free(dep_ch);
+        
+        //not sure where to free it
+        //mem_free(url);
+        //mem_free(html);
+        fclose(file);
+        return make_web;
+
+    }
+
+    //if file is invalid
+    else {
+        fclose(file);
+        return NULL;
+    } 
+}
+
+
+
 
 
 

@@ -1,24 +1,29 @@
-# CS50 TSE LAB 4
-## Xenia Dela Cueva (xdelacuev1)
+# CS50 TSE LAB 4, Updated for Lab 5
+## Xenia Dela Cueva (Github usename: xdelacuev1)
 
 
 ### common
-A library to encapsulate all the knowledge about how to initialize and validate a pageDirectory, and how to write and read page files, in one place... anticipating future use by the Indexer and Querier.
+A library to encapsulate all the knowledge about how to initialize and validate a pageDirectory, and how to write and read page files, how to mkae words lowercase, and the creating of an index (the datastructure that will be used to keep track of a word's appearance in one or more file) in one place... anticipating future use by Querier.
 
 
 ### Usage
 
-Currently, there is only one module in the common directory, which is pagedir. 
+Currently, there is only three modules in the common directory, which is pagedir, word and index. The word module recreates a word string into a lowercase one. The index module keeps track of all the words from one or more file, using a hashtable to make the words as keys and its item a set of counters that keeps track of how many times that word appered an a certain file.
 
 ### Assumptions
 
-No assumptions beyond those that are clear from the spec.
+No assumptions beyond those that are clear from the spec. We assume that the given parameter for word does not have non-alphabet characters. Therefore another assumption we make is that there are no repeating words in an index.
 
 ### Files
 
 * `Makefile` - compilation procedure
 * `pagedir.c` - the implementation of pagedir
 * `pagedir.h` - the interface of pagedir
+* `index.c` - the implementation of index
+* `index.h` - the interface of index
+* `word.c` - the implementation of word
+* `word.h` - the interface of word
+
 
 ### Compilation
 
