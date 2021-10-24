@@ -5,11 +5,10 @@ Pagedir provides functions for writing files of webpage content
 and converting files to its webpage
 **/
 
-#ifndef __PAGEDIR_H
-#define __PAGEDIR_H
-
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
+#include "webpage.h"
 
 /**************** functions ****************/
 /******** pagedir_init ************************/
@@ -51,7 +50,7 @@ void pagedir_save(const webpage_t* page, const char* pageDirectory, const int do
  *   the file parameter is from a directory that is made by crawler
  * 
  */
-webpage_t* pagedir_load(FILE* file);
+webpage_t* pagedir_load(char* file);
 
 /******** pagedir_verify ************************/
 /* Verifies that the given pageDirectory is one made by crawler
@@ -67,3 +66,5 @@ webpage_t* pagedir_load(FILE* file);
  * 
  */
 bool pagedir_verify(const char* pageDirectory);
+
+

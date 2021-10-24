@@ -1,0 +1,5 @@
+core
+indexer
+indexer.o
+indextest
+indextest.o

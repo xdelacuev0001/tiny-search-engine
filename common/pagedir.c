@@ -10,12 +10,13 @@
 #include "webpage.h"
 #include "pagedir.h"
 #include "mem.h"
+#include "file.h"
 
 
 /************* function prototypes ***************/
 bool pagedir_init(const char* pageDirectory);
 void pagedir_save(const webpage_t* page, const char* pageDirectory, const int docID);
-webpage_t* pagedir_load(FILE* file);
+webpage_t* pagedir_load(char* file);
 bool pagedir_verify(const char* pageDirectory);
 
 /******** pagedir_init ************************/
@@ -34,7 +35,7 @@ bool pagedir_init(const char* pageDirectory)
      strcat(file_path, "/.crawler");
 
     //open the file for writing; on error, return false.
-    if ((fp = fopen(file_path, "w")) == NULL) { //"w" is to write
+    if ((fp=fopen(file_path, "w")) == NULL) { //"w" is to write
         return false;
     }
 
@@ -97,14 +98,16 @@ bool pagedir_verify(const char* pageDirectory) {
     strcpy(file_path, pageDirectory);
     strcat(file_path, "/.crawler");
 
-    if (fp = fopen(file_path) != NULL) {
+    if ((fp =fopen(file_path, "r")) != NULL) {
 
-        fclose(file_path);
+        fclose(fp);
+        mem_free(file_path);
         return true;
     }
 
     else {
-        fclose(file_path);
+        fclose(fp);
+        mem_free(file_path);
         return false;
     }  
 
@@ -112,39 +115,34 @@ bool pagedir_verify(const char* pageDirectory) {
 
 /******** pagedir_load ************************/
 /* refer to pagedir.h for function overview **/
-webpage_t* pagedir_load(FILE* file) {
+webpage_t* pagedir_load(char* file) {
 
     FILE* fp;
 
-
     //open 
-    if ((fp = fopen(file)) != NULL) {
+    if ((fp=fopen(file, "r")) != NULL) {
         //first line is URL
         //second line is depth
         //third is html
         
-        char* url = file_readLine(file); 
-        char* dep_ch = file_readLine(file);
+        char* url = file_readLine(fp); 
+        char* dep_ch = file_readLine(fp);
         int depth = 0;
-        sscanf(dep_ch, "%d", depth);
+        sscanf(dep_ch, "%d", &depth);
         
-        char* html = file_readFile(file);
+        char* html = file_readFile(fp);
         
-        webpage_t* make_web = mem_malloc(sizeof(webpage_t));
-        make_web = webpage_new(url, depth, html);
+        webpage_t* make_web = webpage_new(url, depth, html);
         mem_free(dep_ch);
         
-        //not sure where to free it
-        //mem_free(url);
-        //mem_free(html);
-        fclose(file);
+        fclose(fp);
         return make_web;
 
     }
 
     //if file is invalid
     else {
-        fclose(file);
+        fclose(fp);
         return NULL;
     } 
 }

@@ -1,7 +1,7 @@
 /**
  * Xenia Dela Cueva
- * CS50 21F Lab 5
- * Indexer
+ * CS50 21F Lab 5 Indexer
+ * Word: a module providing a function to normalize a word.
  * */
 
 #include <stdio.h>
@@ -10,11 +10,10 @@
 #include <ctype.h>
 #include "mem.h"
 
-
+/********** function ********************/
 char* normalize_word(const char* word);
 
-
-//a module providing a function to normalize a word.
+/********** normalize_word ********************/
 char* normalize_word(const char* word) {
     
     if (word == NULL) {
@@ -23,7 +22,7 @@ char* normalize_word(const char* word) {
 
 
     //allocating space for resulting string which will not be longer than given string
-    char* norm_word = mem_malloc(strlen(word)+1);
+    char* norm_word = mem_malloc(strlen(word)+10);
     
     if (norm_word == NULL) {
         return NULL;
@@ -37,6 +36,8 @@ char* normalize_word(const char* word) {
 
     }
 
+    int j = strlen(word);
+    norm_word[j] = '\0';
     return norm_word;
     }
 }

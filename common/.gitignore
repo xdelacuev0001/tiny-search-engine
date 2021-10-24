@@ -1,2 +1,6 @@
-common
+common.a
+core
+index.o
+pagedir.o
+word
 word.o

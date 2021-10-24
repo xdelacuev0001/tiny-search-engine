@@ -4,8 +4,6 @@
  * TSE Lab 5-Indexer
  * */
 
-#ifndef __WORD_H
-#define __WORD_H
 
 #include <stdio.h>
 #include <stdlib.h>

@@ -3,7 +3,7 @@
 
 
 ### common
-A library to encapsulate all the knowledge about how to initialize and validate a pageDirectory, and how to write and read page files, how to mkae words lowercase, and the creating of an index (the datastructure that will be used to keep track of a word's appearance in one or more file) in one place... anticipating future use by Querier.
+A library to encapsulate all the knowledge about how to initialize and validate a pageDirectory, and how to write and read page files, how to mkae words lowercase, and the creating of an index (the datastructure that will be used to keep track of a word's appearance in one or more file) in one place.
 
 
 ### Usage
@@ -12,7 +12,7 @@ Currently, there is only three modules in the common directory, which is pagedir
 
 ### Assumptions
 
-No assumptions beyond those that are clear from the spec. We assume that the given parameter for word does not have non-alphabet characters. Therefore another assumption we make is that there are no repeating words in an index.
+ We assume that the given parameter for word does not have non-alphabet characters. Therefore another assumption we make is that there are no repeating words in an index. We also assume that a word is no longer than 50 bytes (as we memory allocated 50) for it.
 
 ### Files
 
