@@ -28,6 +28,7 @@ index_t* index_read(char* indexFile);
 void index_write(index_t* index, char* fileName);
 counters_t* index_find(index_t* index, char* key);
 void helper_delete(void* item);
+bool index_insert(index_t* index, const char* key, void* item);
 
 /**************** local functions ****************/
 //not seen outside of this file
