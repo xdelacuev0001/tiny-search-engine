@@ -97,7 +97,6 @@ void hashtable_print(hashtable_t* ht, FILE* fp,
  */
 void hashtable_iterate(hashtable_t* ht, void* arg,
                        void (*itemfunc)(void* arg, const char* key, void* item) );
-
 /**************** hashtable_delete ****************/
 /* Delete hashtable, calling a delete function on each item.
  *

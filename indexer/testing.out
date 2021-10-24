@@ -1,0 +1,118 @@
+bash -v testing.sh
+#!/bin/bash
+#
+# Xenia Dela Cueva CS50 Lab 5
+# testing.sh
+# testing indexer and indextest
+
+
+# format of indexer pageDirectory indexFilename
+#!/bin/bash
+#
+# Xenia Dela Cueva CS50 Lab 5
+# testing.sh
+# testing indexer and indextest
+ 
+
+
+############################# invalid indexer  ########################
+ 
+# indexer with no arguments
+./indexer
+Invalid number of given arguments
+ 
+# indexer with one argument
+./indexer ~/cs50-dev/shared/tse/output/crawler/pages-letters-depth-2/
+Invalid number of given arguments
+ 
+# indexer with three or more arguments
+./indexer ~/cs50-dev/shared/tse/output/crawler/pages-letters-depth-2/ ../outputLab5/ERRindexFilename pageDirectory
+Invalid number of given arguments
+ 
+./indexer ~/cs50-dev/shared/tse/output/crawler/pages-letters-depth-2/ ../outputLab5/ERRindexFilename ../outputLab5/ERRindexFilename
+Invalid number of given arguments
+ 
+# indexer with both invalid arguments
+./indexer ~/cs50-dev/shared/tse/invalid/ indValid
+testing.sh: line 31: 34623 Segmentation fault      (core dumped) ./indexer ~/cs50-dev/shared/tse/invalid/ indValid
+ 
+# indexer with noneexistent pageDirectory
+./indexer ~/cs50-dev/shared/ts/output/crawler/pages-all-depth-3/ ../outputLab5/indexerOutput
+testing.sh: line 34: 34630 Segmentation fault      (core dumped) ./indexer ~/cs50-dev/shared/ts/output/crawler/pages-all-depth-3/ ../outputLab5/indexerOutput
+ 
+# indexer with non-crawler pageDirectory
+./indexer ../outputLab5/ ../outputLab5/indexerOutput
+testing.sh: line 37: 34634 Segmentation fault      (core dumped) ./indexer ../outputLab5/ ../outputLab5/indexerOutput
+ 
+# indexer with invalid indexFilename
+./indexer ~/cs50-dev/shared/tse/output/crawler/pages-letters-depth-2/ ../outputLab5/ERRindexFilename
+ 
+# indexer with read-only directory read-only file
+./indexer ~/cs50-dev/shared/tse/output/crawler/pages-letters-depth-2/ ../outputLab5/readonlyFile
+
+############################ valid indexer ########################################################################
+
+# indexer with valid parameters
+ ./indexer ~/cs50-dev/shared/tse/output/crawler/pages-letters-depth-2/  ../outputLab5/indexerOutput
+ ./indexer ~/cs50-dev/shared/tse/output/crawler/pages-toscrape-depth-1/  ../outputLab5/indexerOutput2
+
+ # testing with VALGRIND for leaks
+valgrind --leak-check=full --show-leak-kinds=all ./indexer ~/cs50-dev/shared/tse/output/crawler/pages-letters-depth-2/  ../outputLab5/indexerOutput
+==34654== Memcheck, a memory error detector
+==34654== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==34654== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==34654== Command: ./indexer /thayerfs/home/f004gwf/cs50-dev/shared/tse/output/crawler/pages-letters-depth-2/ ../outputLab5/indexerOutput
+==34654== 
+==34654== 
+==34654== HEAP SUMMARY:
+==34654==     in use at exit: 0 bytes in 0 blocks
+==34654==   total heap usage: 1,282 allocs, 1,282 frees, 157,723 bytes allocated
+==34654== 
+==34654== All heap blocks were freed -- no leaks are possible
+==34654== 
+==34654== For counts of detected and suppressed errors, rerun with: -v
+==34654== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+ 
+ 
+############################# invalid indextest ########################
+ 
+# indextest with no arguments
+./indextest
+Invalid number of parameters 
+# indextest with only 1 arguments
+./indextest ../outputLab5/indexerOutput
+Invalid number of parameters 
+# indextest with 3 arguments
+./indextest ../outputLab5/indexerOutput2 ../outputLab5/indextestOutput2 ../outputLab5/indextestOutput3
+Invalid number of parameters
+
+############################# valid indextest ########################
+# indextest with valid parameters
+./indextest ../outputLab5/indexerOutput ../outputLab5/indextestOutput
+./indextest ../outputLab5/indexerOutput2 ../outputLab5/indextestOutput2
+
+
+# testing with VALGRIND for leaks
+valgrind --leak-check=full --show-leak-kinds=all ./indextest ../outputLab5/indexerOutput ../outputLab5/indextestOutput
+==34672== Memcheck, a memory error detector
+==34672== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==34672== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==34672== Command: ./indextest ../outputLab5/indexerOutput ../outputLab5/indextestOutput
+==34672== 
+==34672== 
+==34672== HEAP SUMMARY:
+==34672==     in use at exit: 0 bytes in 0 blocks
+==34672==   total heap usage: 102 allocs, 102 frees, 18,929 bytes allocated
+==34672== 
+==34672== All heap blocks were freed -- no leaks are possible
+==34672== 
+==34672== For counts of detected and suppressed errors, rerun with: -v
+==34672== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+
+
+
+#to compare
+~/cs50-dev/shared/tse/indexcmp ../outputLab5/indexerOutput ../outputLab5/indextestOutput
+
+
+
