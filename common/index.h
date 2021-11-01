@@ -82,6 +82,7 @@ void index_write(index_t* index, char* fileName);
  */
 void* index_find(index_t* index, char* key);
 
+
 /**************** index_insert ****************/
 /* Inserts a key with a given item in the index.
  * Caller provides:

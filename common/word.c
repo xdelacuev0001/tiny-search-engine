@@ -42,4 +42,21 @@ char* normalize_word(const char* word) {
     }
 }
 
+//returns the invalid character if a character is not alphabetic
+char* is_word(char* word) {
+
+    for (int i = 0; i < strlen(word); i ++) {
+        if (isalpha(word[i]) == 0) {
+            char* bad_char= &word[i];
+            return bad_char;
+        }
+    }
+
+    return NULL;
+}
+
+
+
+
+
 

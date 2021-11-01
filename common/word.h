@@ -25,4 +25,16 @@
 char* normalize_word(const char* word);
 
 
+/* Given a word as a paremeter, checks if there are any characters that are not valid
+ * Caller provides:
+ *   a string
+ *
+ * Returns:
+ *   invalid character
+ *   NULL if string has all alphabet characters
+**/
+
+char* is_word(char* word);
+
+
 
