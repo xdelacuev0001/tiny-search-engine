@@ -38,7 +38,6 @@ main(int argc, char* argv[])
     parseArgs(argc, argv, &pageDirectory, &indexFilename);
     index_t* index = indexBuild(pageDirectory);
     index_write(index, indexFilename);
-
     index_delete(index);
     
 
@@ -47,7 +46,7 @@ main(int argc, char* argv[])
 static void parseArgs(const int argc, char* argv[], char** pageDirectory , char** indexFilename)
 { 
     //makes sure that there are 3 arguements 
-    //indexer pageDirectory indexFilename
+    //querier pageDirectory indexFilename
     FILE* fp; 
 
     if (argc != 3) {
@@ -69,7 +68,7 @@ static void parseArgs(const int argc, char* argv[], char** pageDirectory , char*
     fp= fopen(*indexFilename, "w");
 
     if (fp == NULL) {
-        fprintf(stderr, "File not open for writing\n");
+        fprintf(stderr, "Index file not open for writing\n");
         exit(1);
 
     }

@@ -82,7 +82,6 @@ static void parseArgs(const int argc, char* argv[], char** seedURL, char** pageD
             }
 
             //validating and parsing page directory
-
             if (pagedir_init(argv[2])) {
                 strcpy(*pageDirectory, argv[2]);
             }
@@ -90,7 +89,7 @@ static void parseArgs(const int argc, char* argv[], char** seedURL, char** pageD
             else {
                 fprintf(stderr, "Page directory failed to initialize\n");
                 exit(1);
-            }
+            //}
         }
     }
     
